@@ -16,6 +16,13 @@ blossom {
     replaceToken("@version@", project.ext["internalVersion"])
 }
 
+repositories {
+    maven {
+        name = "sponge"
+        url = uri("https://repo.spongepowered.org/repository/maven-public/")
+    }
+}
+
 sponge {
     apiVersion("7.2.0")
     loader {
@@ -41,13 +48,6 @@ sponge {
             optional(false)
             version("7.2.0")
         }
-    }
-}
-
-repositories {
-    maven {
-        name = "sponge"
-        url = uri("https://repo.spongepowered.org/maven/")
     }
 }
 

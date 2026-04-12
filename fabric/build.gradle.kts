@@ -31,8 +31,8 @@ dependencies {
     }
 
     "implementation"("org.yaml:snakeyaml:2.0")
-    "modImplementation"("me.lucko:fabric-permissions-api:0.2-SNAPSHOT")
-    "include"("me.lucko:fabric-permissions-api:0.2-SNAPSHOT")
+    "modImplementation"("me.lucko:fabric-permissions-api:0.3.1")
+    "include"("me.lucko:fabric-permissions-api:0.3.1")
 
 
     "api"(project(":nuvotifier-api"))

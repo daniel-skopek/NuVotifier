@@ -16,7 +16,7 @@ resources/velocity.jar : resources
 	wget -O resources/velocity.jar https://ci.velocitypowered.com/job/velocity-1.1.0/lastSuccessfulBuild/artifact/proxy/build/libs/velocity-proxy-1.1.0-SNAPSHOT-all.jar
 
 resources/sponge.jar : resources
-	wget -O resources/sponge.jar https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/1.12.2-7.3.0/spongevanilla-1.12.2-7.3.0.jar
+	wget -O resources/sponge.jar https://repo.spongepowered.org/repository/maven-public/org/spongepowered/spongevanilla/1.12.2-7.3.0/spongevanilla-1.12.2-7.3.0.jar
 
 resources/viaversion.jar : resources
 	wget -O resources/viaversion.jar https://ci.viaversion.com/job/ViaVersion/459/artifact/jar/target/ViaVersion-3.1.1-SNAPSHOT.jar
