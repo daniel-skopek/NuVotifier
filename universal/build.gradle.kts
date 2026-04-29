@@ -12,13 +12,13 @@ configurations {
 }
 
 dependencies {
-    "implementation"(project(":nuvotifier-api"))
-    "implementation"(project(":nuvotifier-common"))
-    "implementation"(project(":nuvotifier-bukkit"))
-    "implementation"(project(":nuvotifier-bungeecord"))
-    "implementation"(project(":nuvotifier-sponge"))
-    "implementation"(project(":nuvotifier-fabric"))
-    "implementation"(project(":nuvotifier-velocity"))
+    "api"(project(":nuvotifier-api"))
+    "api"(project(":nuvotifier-common"))
+    "api"(project(":nuvotifier-bukkit"))
+    "api"(project(":nuvotifier-bungeecord"))
+    "api"(project(":nuvotifier-sponge"))
+    "api"(project(":nuvotifier-fabric"))
+    "api"(project(":nuvotifier-velocity"))
 }
 
 tasks.named<Jar>("jar") {
@@ -30,6 +30,7 @@ tasks.named<Jar>("jar") {
 }
 
 tasks.named<ShadowJar>("shadowJar") {
+    archiveClassifier.set("")
     configurations = listOf(project.configurations["shadeOnly"], project.configurations["runtimeClasspath"])
 
     dependencies {
