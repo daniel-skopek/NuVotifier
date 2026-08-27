@@ -36,6 +36,7 @@ import com.vexsoftware.votifier.platform.scheduler.VotifierScheduler;
 import com.vexsoftware.votifier.util.IOUtil;
 import com.vexsoftware.votifier.util.KeyCreator;
 import com.vexsoftware.votifier.util.TokenUtil;
+import com.tcoded.folialib.FoliaLib;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -84,16 +85,12 @@ public class NuVotifierBukkit extends JavaPlugin implements VoteHandler, Votifie
     private ForwardingVoteSink forwardingMethod;
     private VotifierScheduler scheduler;
     private LoggingAdapter pluginLogger;
-    private boolean isFolia;
+    private FoliaLib foliaLib;
 
     private boolean loadAndBind() {
-        try {
-            Class.forName("io.papermc.paper.threadedregions.scheduler.AsyncScheduler");
-            isFolia = true;
-
-            getLogger().info("Using Folia; VotifierEvent will be fired asynchronously.");
-        } catch (ClassNotFoundException e) {
-            isFolia = false;
+        foliaLib = new FoliaLib(this);
+        if (foliaLib.isFolia()) {
+            getLogger().info("Using Folia; VotifierEvent will be fired on the global region scheduler.");
         }
 
         scheduler = new BukkitScheduler(this);
@@ -380,14 +377,6 @@ public class NuVotifierBukkit extends JavaPlugin implements VoteHandler, Votifie
             getLogger().log(Level.SEVERE, "a list of listeners you can configure.");
         }
 
-        if (!isFolia) {
-            getServer().getScheduler().runTask(
-                    this, () -> getServer().getPluginManager().callEvent(new VotifierEvent(vote))
-            );
-        } else {
-            getServer().getScheduler().runTaskAsynchronously(
-                    this, () -> getServer().getPluginManager().callEvent(new VotifierEvent(vote, true))
-            );
-        }
+        foliaLib.getScheduler().runNextTick(task -> getServer().getPluginManager().callEvent(new VotifierEvent(vote)));
     }
 }

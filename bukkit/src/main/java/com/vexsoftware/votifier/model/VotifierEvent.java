@@ -31,17 +31,6 @@ public class VotifierEvent extends Event {
     }
 
     /**
-     * Constructs a vote event that encapsulated the given vote record.
-     *
-     * @param vote vote record
-     * @param async whether the event will be fired asynchronously
-     */
-    public VotifierEvent(final Vote vote, final boolean async) {
-        super(async);
-        this.vote = vote;
-    }
-
-    /**
      * Return the encapsulated vote record.
      *
      * @return vote record

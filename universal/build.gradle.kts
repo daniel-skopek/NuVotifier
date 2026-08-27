@@ -7,6 +7,13 @@ plugins {
 applyPlatformAndCoreConfiguration()
 applyShadowConfiguration()
 
+repositories {
+    maven {
+        name = "tcoded"
+        url = uri("https://repo.tcoded.com/releases")
+    }
+}
+
 configurations {
     compileClasspath.get().extendsFrom(create("shadeOnly"))
 }
@@ -41,7 +48,10 @@ tasks.named<ShadowJar>("shadowJar") {
         include(dependency(":nuvotifier-sponge"))
         include(dependency(":nuvotifier-fabric"))
         include(dependency(":nuvotifier-velocity"))
+        include(dependency("com.tcoded:FoliaLib"))
     }
+
+    relocate("com.tcoded.folialib", "com.vexsoftware.votifier.lib.folialib")
 
     exclude("GradleStart**")
     exclude(".cache");

@@ -13,6 +13,10 @@ repositories {
         name = "paper"
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
+    maven {
+        name = "tcoded"
+        url = uri("https://repo.tcoded.com/releases")
+    }
 }
 
 configurations {
@@ -21,6 +25,7 @@ configurations {
 
 dependencies {
     "compileOnly"("io.papermc.paper:paper-api:1.18-R0.1-SNAPSHOT")
+    "implementation"("com.tcoded:FoliaLib:${Versions.FOLIALIB}")
     "api"(project(":nuvotifier-api"))
     "api"(project(":nuvotifier-common"))
 }
@@ -48,7 +53,10 @@ tasks.named<ShadowJar>("shadowJar") {
     dependencies {
         include(dependency(":nuvotifier-api"))
         include(dependency(":nuvotifier-common"))
+        include(dependency("com.tcoded:FoliaLib"))
     }
+
+    relocate("com.tcoded.folialib", "com.vexsoftware.votifier.lib.folialib")
 }
 
 tasks.named("assemble").configure {
